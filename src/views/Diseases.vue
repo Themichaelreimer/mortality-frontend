@@ -4,7 +4,7 @@
     <v-container
 
     >
-        <v-card class="pa-6 ma-6">
+        <v-card v-if="!loading" class="pa-6 ma-6">
             <span>
             <v-card-title>
                 Diseases
@@ -29,7 +29,6 @@
 
 <script>
 // @ is an alias to /src
-
 export default {
   name: 'Diseases',
   data: function() {
@@ -39,7 +38,11 @@ export default {
                 text: 'Disease',
                 align: 'start',
                 sortable: true,
-                value: 'disease'
+                value: 'name'
+            },
+            {
+                text: 'Specialty',
+                value: 'specialty'
             },
             {
                 text: 'Frequency (per year)',
@@ -50,28 +53,35 @@ export default {
                 value: 'mortality_rate'
             }
         ],
-        data: [
-            {
-                id:1, 
-                disease:'Rhinovirus', 
-                frequency: '0.1',
-                mortality_rate:'0.01%'
-            },
-            {
-                id:2, 
-                disease:'Influenza A', 
-                frequency: '0.02',
-                mortality_rate:'0.33%'
-            },
-            {
-                id:3, 
-                disease:'Influenza B', 
-                frequency: '0.019',
-                mortality_rate:'0.25%'
-            },
-        ],
+        data: [],
         search: null,
+        loading: true
     }
+  },
+  methods: {
+      getData: function(){
+          let self = this
+          var req = new XMLHttpRequest();
+          req.open("GET", "http://127.0.0.1:8000/diseases/");  // Django backend URL
+          req.onload = function(){
+              if(req.readyState === 4){
+                  if(req.status === 200){
+                      self.data = JSON.parse(req.responseText);
+                      console.log(self.data);
+                  }else{
+                      console.error(req.statusText);
+                  }
+              }
+          };
+          req.onerror = function() {
+              console.error(req.statusText);
+          }
+          req.send(null);
+      }
+  },
+  mounted: function(){
+      this.data = this.getData();
+      this.loading = false;
   }
 }
 </script>

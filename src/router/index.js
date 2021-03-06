@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Diseases from '../views/Diseases.vue'
 import Symptoms from '../views/Symptoms.vue'
 import Covid from '../views/Covid.vue'
+import LifeTables from '../views/LifeTables'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/covid',
     name: 'Covid',
     component: Covid
+  },
+  {
+    path: '/lifetables',
+    name: 'LifeTables',
+    component: LifeTables
   },
   {
     path: '/about',
