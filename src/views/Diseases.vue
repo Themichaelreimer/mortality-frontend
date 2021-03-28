@@ -60,7 +60,7 @@ export default {
   },
   methods: {
       getData: function(){
-          let self = this
+          let self = this;
           var req = new XMLHttpRequest();
           req.open("GET", "http://127.0.0.1:8000/diseases/");  // Django backend URL
           req.onload = function(){
