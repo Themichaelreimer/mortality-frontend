@@ -4,7 +4,7 @@
     <v-container
 
     >
-        <v-card v-if="!loading" class="pa-6 ma-6">
+        <v-card class="pa-6 ma-6">
             <span>
             <v-card-title>
                 Diseases
@@ -21,6 +21,7 @@
                 :headers="headers"
                 :items="data"
                 :search="search"
+                :loading="loading"
             />
         </v-card>
     </v-container>
@@ -68,6 +69,8 @@ export default {
                   if(req.status === 200){
                       self.data = JSON.parse(req.responseText);
                       console.log(self.data);
+                      self.loading = false;
+
                   }else{
                       console.error(req.statusText);
                   }
@@ -81,7 +84,6 @@ export default {
   },
   mounted: function(){
       this.data = this.getData();
-      this.loading = false;
   }
 }
 </script>
