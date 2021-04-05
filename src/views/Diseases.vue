@@ -23,6 +23,9 @@
                 :search="search"
                 :loading="loading"
             />
+            <v-card-text>
+                Source: Wikipedia (Webscraped)
+            </v-card-text>
         </v-card>
     </v-container>
   </div>
@@ -46,7 +49,7 @@ export default {
                 value: 'specialty'
             },
             {
-                text: 'Frequency (per year)',
+                text: 'Frequency',
                 value: 'frequency'
             },
             {

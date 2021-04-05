@@ -44,6 +44,9 @@
       <highcharts
         :options="chartOptions"
       />
+      <v-card-text>
+        Source: Human Mortality Database
+      </v-card-text>
     </v-card>
   </v-container>
   </div>
