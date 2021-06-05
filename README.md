@@ -1,24 +1,16 @@
 # frontend
 
-## Project setup
+## Local Setup
 ```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
+npm install
+npm run serve
 ```
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## Server Setup
+TBD Once deployed :)
 
-### Lints and fixes files
-```
-yarn lint
-```
+## Gifs
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+![Disease Table](https://github.com/Themichaelreimer/mortality-frontend/blob/master/table.gif?raw=true)
+
+![Life Table](https://github.com/Themichaelreimer/mortality-frontend/blob/master/graph.gif?raw=true)
