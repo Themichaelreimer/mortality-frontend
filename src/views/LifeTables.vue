@@ -54,7 +54,7 @@
 
 <script>
 // @ is an alias to /src
-import postRequest from '../helpers';
+import { postRequest } from '../helpers';
 import { Chart } from 'highcharts-vue';
 
 export default {
@@ -115,27 +115,16 @@ export default {
   methods: {
     getCountries: function() {
       let self = this;
-      var req = new XMLHttpRequest();
-      req.open("POST", "http://127.0.0.1:8000/lifetables_countries/");
-      req.onload = function(){
-        if(req.readyState === 4){
-          if(req.status === 200 ){
-            self.countries = JSON.parse(req.responseText);
-          }
-        }
-      };
-      req.onerror = function() {
-        console.error(req.statusText);
-      }
-      req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-      req.send(null);
+      postRequest('lifetables_countries/', {}, function(result){
+        self.countries = result;
+      });
       this.getData();
     },
 
     getYears: function() {
       let self = this;
       const data = {country: this.selectedCountry};
-      postRequest('http://127.0.0.1:8000/lifetable_years/', data, function(result){
+      postRequest('lifetable_years/', data, function(result){
         self.years = result;
       });
       this.getData();
@@ -149,7 +138,7 @@ export default {
           year: this.selectedYear,
           sex: this.selectedSex
         };
-        postRequest('http://127.0.0.1:8000/lifetables/', data, function(result){
+        postRequest('lifetables/', data, function(result){
           self.tables = result;
         });
       }

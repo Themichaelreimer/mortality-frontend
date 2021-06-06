@@ -33,6 +33,8 @@
 
 <script>
 // @ is an alias to /src
+import { postRequest } from '../helpers';
+
 export default {
   name: 'Diseases',
   data: function() {
@@ -65,24 +67,11 @@ export default {
   methods: {
       getData: function(){
           let self = this;
-          var req = new XMLHttpRequest();
-          req.open("GET", "http://127.0.0.1:8000/diseases/");  // Django backend URL
-          req.onload = function(){
-              if(req.readyState === 4){
-                  if(req.status === 200){
-                      self.data = JSON.parse(req.responseText);
-                      console.log(self.data);
-                      self.loading = false;
 
-                  }else{
-                      console.error(req.statusText);
-                  }
-              }
-          };
-          req.onerror = function() {
-              console.error(req.statusText);
-          }
-          req.send(null);
+        postRequest('diseases/', {}, function(result){
+            self.data = result;
+            self.loading = false;
+        });
       }
   },
   mounted: function(){
